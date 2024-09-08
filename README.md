@@ -21,7 +21,7 @@ Para executar a aplicação frontend, siga os passos abaixo:
    ```bash
    cd front
    docker-compose up
-
+   docker-compose run react-app npm install
 
 ### 2. Backend (Flask)
 
