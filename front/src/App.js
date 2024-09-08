@@ -20,7 +20,8 @@ const App = () => {
     pressaoDiastolica: '',
     optionDadosIniciais: '',
     optionTitularidade: '',
-    naoSeiPressao: ''
+    naoSeiPressao: '',
+    diabetes: ''
   });
 
   const handleNext = () => setPage((prevPage) => prevPage + 1);
@@ -34,7 +35,7 @@ const App = () => {
       case 0:
         return <FormPage1 formData={formData} setFormData={setFormData} handleNext={handleNext} />;
       case 1:
-        return <FormPage2 formData={formData} setFormData={setFormData} />;
+        return <FormPage2 formData={formData} setFormData={setFormData} handleNext={handleNext} />;
       case 2:
         return <FormPage3 formData={formData} setFormData={setFormData} />;
       default:
@@ -56,7 +57,13 @@ const App = () => {
           {page < 2 ? (
             <Button
               variant="contained"
-              onClick={page === 0 ? () => document.querySelector('#submitPage1').click() : handleNext}
+              onClick={() => {
+                if (page === 0) {
+                  document.querySelector('#submitPage1').click();
+                } if (page === 1) {
+                  document.querySelector('#submitPage2').click();
+                }
+              }}
             >
               Próximo
             </Button>

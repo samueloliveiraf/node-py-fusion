@@ -77,7 +77,8 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
         if (!formData.pressaoSistolica) camposNaoPreenchidos.push('Pressão Sistólica');
         if (!formData.pressaoDiastolica) camposNaoPreenchidos.push('Pressão Diastólica');
       }
-      if (!formData.optionDadosIniciais) camposNaoPreenchidos.push('Confirme se os dados acima estão corretos');
+      if (formData.optionDadosIniciais === 'nao') camposNaoPreenchidos.push('Você só pode passar para a próxima página se a confirmação = Os dados acima estão corretos? = (Sim)');
+      if (!formData.optionDadosIniciais) camposNaoPreenchidos.push('Os dados acima estão corretos?');
       if (!formData.optionTitularidade) camposNaoPreenchidos.push('Informe a titularidade');
       if (!formData.dataNascimento) camposNaoPreenchidos.push('Data de nascimento');
       if (!formData.sexoBiologico) camposNaoPreenchidos.push('Sexo biológico');
@@ -86,11 +87,11 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
     }
   };
 
-  const handleCheckboxChange = (value) => {
+  const handleCheckboxDadosCorretos = (value) => {
     setFormData({ ...formData, optionDadosIniciais: value });
   };
 
-  const handleCheckboxChange2 = (value) => {
+  const handleCheckboxTitularidade = (value) => {
     setFormData({ ...formData, optionTitularidade: value });
   };
 
@@ -100,7 +101,7 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
 
   return (
     <Box>
-      <Typography variant='h6' gutterBottom>Página 1 - Informações Pessoais</Typography>
+      <Typography variant='h6' gutterBottom>Página 1</Typography>
 
       <TextField
         label='Nome'
@@ -172,7 +173,7 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
           control={
             <Checkbox
               checked={formData.optionDadosIniciais === 'sim'}
-              onChange={() => handleCheckboxChange('sim')}
+              onChange={() => handleCheckboxDadosCorretos('sim')}
               color='primary'
             />
           }
@@ -182,7 +183,7 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
           control={
             <Checkbox
               checked={formData.optionDadosIniciais === 'nao'}
-              onChange={() => handleCheckboxChange('nao')}
+              onChange={() => handleCheckboxDadosCorretos('nao')}
               color='primary'
             />
           }
@@ -198,7 +199,7 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
           control={
             <Checkbox
               checked={formData.optionTitularidade === 'titular'}
-              onChange={() => handleCheckboxChange2('titular')}
+              onChange={() => handleCheckboxTitularidade('titular')}
               color='primary'
             />
           }
@@ -208,7 +209,7 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
           control={
             <Checkbox
               checked={formData.optionTitularidade === 'dependente'}
-              onChange={() => handleCheckboxChange2('dependente')}
+              onChange={() => handleCheckboxTitularidade('dependente')}
               color='primary'
             />
           }
@@ -342,15 +343,14 @@ const FormPage1 = ({ formData, setFormData, handleNext }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={formData.naoSeiPressao}
                 onChange={(e) => setFormData({ ...formData, naoSeiPressao: e.target.checked })}
+                checked={formData.naoSeiPressao}
               />
             }
             label='Não sei a minha pressão arterial.'
           />
         </CardContent>
       </Card>
-
 
       <button id='submitPage1' onClick={handleSubmit} style={{ display: 'none' }}>Submit</button>
     </Box>
