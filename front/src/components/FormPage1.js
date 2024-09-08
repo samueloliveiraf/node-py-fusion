@@ -26,6 +26,7 @@ const pressaoOptions = [
   '- Nenhum -', 'Menor que 120', 'De 120 a 129', 'De 130 a 139', 'De 140 a 159', 'De 160 a 179', '180 ou maior'
 ];
 
+
 const FormPage1 = ({ formData, setFormData, handleNext }) => {
   const [errors, setErrors] = useState({});
   
